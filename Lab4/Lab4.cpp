@@ -1,20 +1,106 @@
-// Lab4.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
-
-int main()
-{
-    std::cout << "Hello World!\n";
+#include <string>
+using namespace std;
+// Print out the menu of choices for the user to select from
+void printMenu() {
+	cout << "Please Select which operation to perform:" << endl;
+	cout << "\t1. Factorial" << endl;
+	cout << "\t2. Arithmetic Series" << endl;
+	cout << "\t3. Geometric Series" << endl;
+	cout << "\t4. Exit" << endl;
+	cout << "Your Selection: ";
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+void factorial() {
+	int num;
+	cout << "Factorial: "<<endl<<"Enter a number to compute the factorial of: ";
+	cin >> num;
+	if (num <= 0) {
+		cout << "Nice try. Please enter a POSITIVE number: ";
+		cin >> num;
+	}
+	int factorial = 1;
+	string print = "";
+	for (int i = 1; i <= num; i++) {
+		factorial = factorial * i;
+		if (i == num) {
+			print = print + to_string(i);
+		}
+		else {
+			print = print + to_string(i) + " * ";
+		}
+	}
+	cout <<num<<"! = "<<print<<" = "<<factorial<< endl;
+}
+void arithmetic() {
+	int stNum;
+	int diff;
+	int terms;
+	cout << "Arithmetic: " << endl;
+	cout << "Enter a number to start at: ";
+	cin >> stNum;
+	cout << "Enter a number to add each time: ";
+	cin >> diff;
+	cout << "Enter a number of elements in the series: ";
+	cin >> terms;
+	int sum = 0;
+	string print = "";
+	for (int i = 0; i < terms; i++) {
+		sum = sum + stNum;
+		if (i == terms - 1) {
+			print = print + to_string(stNum);
+		}
+		else {
+			print = print + to_string(stNum) + " + ";
+		}
+		stNum = stNum + diff;
+	}
+	cout << print << " = " << sum << endl;
+}
+void geometric() {
+	int stNum;
+	int	diff;
+	int terms;
+	cout << "Geometric: " << endl;
+	cout << "Enter a number to start at: ";
+	cin	 >> stNum;
+	cout << "Enter a number to multiply each time: ";
+	cin	 >> diff;
+	cout << "Enter a number of elements in the series: ";
+	cin	 >> terms;
+	int sum = 0;
+	string print = "";
+	for (int i = 0; i < terms; i++) {
+		sum = sum + stNum;
+		if (i == terms - 1) {
+			print = print + to_string(stNum);
+		}
+		else {
+			print = print + to_string(stNum) + " + ";
+		}
+		stNum = stNum * diff;
+	}
+	cout << print << " = " << sum << endl;
+}
+int main() {
+	int choice;
+	char again;
+	do {
+		printMenu();
+		cin >> choice;
+		// Quit if user chooses to exit (or any invalid choice)
+		if (choice > 3 || choice < 1) {
+			return 0;
+		}
+		else if (choice == 1) {
+			factorial();
+		}
+		else if (choice == 2) {
+			arithmetic();
+		}
+		else if (choice == 3) {
+			geometric();
+		}
+		cout << "Go Again? [Y/N] ";
+		cin >> again;
+	} while (again == 'y' || again == 'Y');
+}
